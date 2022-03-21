@@ -12,7 +12,7 @@ In addition to the primary elements there are opinions
 
 ## Entities
 
- * An entity is a named collection of one or more attributes
+ * An entity is a named container for one or more attributes
  * Entity names for any given model must be unique
  * All business objects (as I learned it) are entities
  * Not all entities are business objects
@@ -81,6 +81,13 @@ My issues with using natural keys include:
 
  * Space. Synthetic keys tend to result in tables that take less disk space and therefore require less I/O when reading/writing data.
 
+Opinion:
+
+ * Larger databases (by table count) probably benefit more from using synthetic keys vs. not.
+ * Larger databases (by data size) are probably smaller when using synthetic keys vs. not.
+ * Deep data structure (many/nested child tables) probably benefit more from using synthetic keys vs. not.
+ * Therefore: use synthetic keys
+
 ----
 
 Tables should have a unique constraint/index that indicates the natural key for the table.
@@ -95,6 +102,10 @@ This makes it easier to refactor tables without breaking things as the view can 
 
 This doesn't matter as much for stand-alone databases that only have one front-end, however my experiece doesn't tend to reflect that use case much-- even databases that are intended to only have one front-end end up getting used by other applications or interfaced with other databases.
 
+It should be noted that applications that make extensive use of ORMs might not play as well with this approach.
+
+Opinion: Create façade views and use them to the extent possible/practicable.
+
 ----
 
 Tables should not be directly updatable, but this really depends on the database enging being used and the use case for the database.
@@ -108,5 +119,11 @@ For those databases that have multiple applications that could be interacting wi
 Having procedural code in the database does tie the application(s) more strongly to a specific database engine, however, my experience is that organizations are more likely to change out front-end(s) than they are to change out the back-end so having the code in the database might actually result in less re-writing over time.
 
 Having procedural code in the database can result in developers having yet another language to deal with.
+
+As with façade views, it should be noted that applications that make extensive use of ORMs might not play as well with this approach.
+
+For those applications that can target multiple different database back-ends it may be better letting the application code directly update the tables. The applications may well be depending on an ORM for database access.
+
+Opinion: It depends on the use case
 
 ----

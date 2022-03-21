@@ -7,10 +7,11 @@ An exploration/proof of concept. A work in progress
  * An exploration of an attempt to remove some of the tedium from data modeling
  * Firstly by eliminating the fiddly graphical modeling (plus, who really needs the carpal tunnel from dragging boxes and lines around all day)
  * Secondly by being opinionated about how a model should be translated between conceptual, logical, and physical
- * Should generate database DDL output
+ * Should be able to generate database DDL
  * May not work for all situations
  * May not work 100% for any situation
  * Hope to be at least 90% for many situations
+ * Even if generating DDL is a bridge or two too far, it should still be a usefull tool
  * Graphical diagrams, if they exist, are generated representations of the tabular modeling data
 
 # Opinions
