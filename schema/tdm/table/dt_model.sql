@@ -1,7 +1,7 @@
 CREATE TABLE tdm.dt_model (
     id serial NOT NULL,
-    db_engine_id int NOT NULL,
-    update_strategy_id int NOT NULL,
+    db_engine_id int NOT NULL default 0,
+    update_strategy_id int NOT NULL default 0,
     name character varying ( 60 ) NOT NULL,
     description character varying ( 1000 ),
     created_by integer,

@@ -14,6 +14,7 @@ REVOKE ALL ON TABLE tdm.st_history_type FROM public ;
 
 insert into tdm.st_history_type ( id, name, description )
 values
+( 0, 'TBD', 'To be determined.' ),
 ( 1, 'None', 'Do not keep any historical data.' ),
 ( 2, 'History table', 'Use a separate table for tracking historical data.' ),
 ( 3, 'Minimal temporal table', 'Use the data table to track historical data using a minimal set of temporal columns.' ) ;

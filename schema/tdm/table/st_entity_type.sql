@@ -16,6 +16,7 @@ REVOKE ALL ON TABLE tdm.st_entity_type FROM public ;
 
 insert into tdm.st_entity_type ( id, table_prefix, name, description )
 values
+( 0, 'TBD', 'To be determined', 'To be determined' ),
 ( 1, 'dt', 'Business data', 'The entity (and resulting table) contains business data.' ),
 ( 2, 'rt', 'Reference data', 'The entity (and resulting table) contains reference data that is maintained by the business.' ),
 ( 3, 'st', 'System data', 'The entity (and resulting table) contains system (reference, configuration, etc.) data that is not maintained by the business.' ),
