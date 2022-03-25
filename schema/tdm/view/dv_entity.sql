@@ -12,6 +12,8 @@ SELECT de.id,
         de.description,
         ste.id AS entity_type_id,
         ste.name AS entity_type_name,
+        sts.id AS entity_size_id,
+        sts.name AS entity_size_name,
         sht.id AS history_type_id,
         sht.name AS history_type_name,
         de.update_strategy_id,
@@ -33,6 +35,8 @@ SELECT de.id,
         ON ( de_st.id = de.supertype_entity_id )
     LEFT JOIN tdm.st_entity_type ste
         ON ( ste.id = de.entity_type_id )
+    LEFT JOIN tdm.st_entity_size sts
+        ON ( sts.id = de.entity_size_id )
     LEFT JOIN tdm.st_history_type sht
         ON ( sht.id = de.history_type_id )
     LEFT JOIN tdm.st_update_strategy sus

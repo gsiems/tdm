@@ -2,11 +2,13 @@ CREATE TABLE tdm.st_db_datatype (
     id int NOT NULL,
     db_engine_id int NOT NULL,
     datatype_id int NOT NULL,
+    entity_size_id int,
     name character varying ( 60 ) NOT NULL,
     description character varying ( 1000 ),
     CONSTRAINT st_db_datatype_pk PRIMARY KEY ( id ),
-    CONSTRAINT st_db_datatype_nk UNIQUE ( db_engine_id, name ),
-    CONSTRAINT st_db_datatype_nk02 UNIQUE ( db_engine_id, datatype_id ) ) ;
+    CONSTRAINT st_db_datatype_nk UNIQUE ( db_engine_id, name )
+    --CONSTRAINT st_db_datatype_nk02 UNIQUE ( db_engine_id, datatype_id )
+    ) ;
 
 ALTER TABLE tdm.st_db_datatype
     ADD CONSTRAINT st_db_datatype_fk01
@@ -18,11 +20,19 @@ ALTER TABLE tdm.st_db_datatype
     FOREIGN KEY ( datatype_id )
     REFERENCES tdm.st_datatype ( id ) ON UPDATE CASCADE ;
 
+ALTER TABLE tdm.st_db_datatype
+    ADD CONSTRAINT st_db_datatype_fk03
+    FOREIGN KEY ( entity_size_id )
+    REFERENCES tdm.st_entity_size ( id ) ON UPDATE CASCADE ;
+
 CREATE INDEX st_db_datatype_idx01 ON tdm.st_db_datatype (
     db_engine_id ) ;
 
 CREATE INDEX st_db_datatype_idx02 ON tdm.st_db_datatype (
     datatype_id ) ;
+
+CREATE INDEX st_db_datatype_idx03 ON tdm.st_db_datatype (
+    entity_size_id ) ;
 
 COMMENT ON TABLE tdm.st_db_datatype IS 'Datatypes as supported by specific database engines. This provides the mappping between the base datatypes and the corresponding datatype for the target database.' ;
 COMMENT ON COLUMN tdm.st_db_datatype.id IS 'The ID for a database datatype.' ;
@@ -57,5 +67,11 @@ REVOKE ALL ON TABLE tdm.st_db_datatype FROM public ;
 ( 1, 16, 'time', '' ),
 ( 1, 17, 'timestamp', '' ),
 ( 1, 18, 'timestamp with timezone', '' ) ;
+
+( 0, 'TBD', 'To be determined' ),
+( 1, '30k', 'The entity will never have more than 30,000 rows of data.' ),
+( 2, '2E+9', 'The entity will never have more than 2,000,000,000 rows of data.' ),
+( 3, '9E+18', 'The entity will never have more than 9 E+19 rows of data.' ) ;
+
 
 */

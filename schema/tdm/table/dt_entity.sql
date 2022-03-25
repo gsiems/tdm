@@ -4,6 +4,7 @@ CREATE TABLE tdm.dt_entity (
     namespace_id int NOT NULL,
     supertype_entity_id int,
     entity_type_id int NOT NULL default 0,
+    entity_size_id int NOT NULL default 0,
     history_type_id int NOT NULL default 0,
     update_strategy_id int NOT NULL default 0,
     name character varying ( 60 ) NOT NULL,
@@ -39,21 +40,26 @@ ALTER TABLE tdm.dt_entity
 
 ALTER TABLE tdm.dt_entity
     ADD CONSTRAINT dt_entity_fk05
+    FOREIGN KEY ( entity_size_id )
+    REFERENCES tdm.st_entity_size ( id ) ON UPDATE CASCADE ;
+
+ALTER TABLE tdm.dt_entity
+    ADD CONSTRAINT dt_entity_fk06
     FOREIGN KEY ( history_type_id )
     REFERENCES tdm.st_history_type ( id ) ON UPDATE CASCADE ;
 
 ALTER TABLE tdm.dt_entity
-    ADD CONSTRAINT dt_entity_fk06
+    ADD CONSTRAINT dt_entity_fk07
     FOREIGN KEY ( update_strategy_id )
     REFERENCES tdm.st_update_strategy ( id ) ON UPDATE CASCADE ;
 
 ALTER TABLE tdm.dt_entity
-    ADD CONSTRAINT dt_entity_fk07
+    ADD CONSTRAINT dt_entity_fk08
     FOREIGN KEY ( created_by )
     REFERENCES tdm.dt_user ( id ) ON UPDATE CASCADE ;
 
 ALTER TABLE tdm.dt_entity
-    ADD CONSTRAINT dt_entity_fk08
+    ADD CONSTRAINT dt_entity_fk09
     FOREIGN KEY ( updated_by )
     REFERENCES tdm.dt_user ( id ) ON UPDATE CASCADE ;
 
@@ -71,9 +77,12 @@ CREATE INDEX dt_entity_idx04 ON tdm.dt_entity (
     entity_type_id ) ;
 
 CREATE INDEX dt_entity_idx05 ON tdm.dt_entity (
-    history_type_id ) ;
+    entity_size_id ) ;
 
 CREATE INDEX dt_entity_idx06 ON tdm.dt_entity (
+    history_type_id ) ;
+
+CREATE INDEX dt_entity_idx07 ON tdm.dt_entity (
     update_strategy_id ) ;
 
 COMMENT ON TABLE tdm.dt_entity IS 'The business objects/entities that are being modeled. These probably result in the creation of one or more DB tables.' ;

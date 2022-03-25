@@ -4,6 +4,7 @@ CREATE OR REPLACE PROCEDURE tdm.entity_insert (
     a_namespace_id in int default NULL,
     a_supertype_entity_id in int default NULL,
     a_entity_type_id in int default NULL,
+    a_entity_size_id in int default NULL,
     a_history_type_id in int default NULL,
     a_update_strategy_id in int default NULL,
     a_name in character varying default NULL,
@@ -25,6 +26,7 @@ Procedure entity_insert inserts an entity
 | a_namespace_id        | in     | int      | The ID of the namespace that contains the entity |
 | a_supertype_entity_id | in     | int      | The ID of the entity that this is a subset of |
 | a_entity_type_id      | in     | int      | The ID indicating the nature of the kind of entity |
+| a_entity_size_id      | in     | int      | The ID indicating the maximum number of entities to be stored |
 | a_history_type_id     | in     | int      | The type of history to keep for the table data |
 | a_update_strategy_id  | in     | int      | The strategy to use when dealing with update conflicts |
 | a_name                | in     | varchar  | The name of the entity                |
@@ -84,6 +86,7 @@ BEGIN
             namespace_id,
             supertype_entity_id,
             entity_type_id,
+            entity_size_id,
             history_type_id,
             update_strategy_id,
             name,
@@ -99,6 +102,7 @@ BEGIN
             a_namespace_id,
             a_supertype_entity_id,
             l_entity_type_id,
+            a_entity_size_id,
             a_history_type_id,
             a_update_strategy_id,
             l_name,
